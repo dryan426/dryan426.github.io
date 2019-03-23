@@ -1,0 +1,224 @@
+<html>
+	<head>
+		<title>Jungle Camp Tracker</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	</head>
+	<body>
+		<!--Top Side-->
+		<h1>Top side camps</h1>
+		<div class="trackerContainer topSide">
+			<!--Krugs (2:30)-->
+			<a onclick="main('topKrugs')" name="topKrugs">
+				<b>Krugs</b>
+				<p name="topKrugsTimer">2:30</p>
+			</a>
+			<!--Red (5:00)-->
+			<a onclick="main('topRed')" name="topRed">
+				<b>Red</b>
+				<p name="topRedTimer">5:00</p>
+			</a>
+			<!--Raptors (2:30)-->
+			<a onclick="main('topRaptors')" name="topRaptors">
+				<b>Raptors</b>
+				<p name="topRaptorsTimer">2:30</p>
+			</a>
+			<!--Wolves (2:30)-->
+			<a onclick="main('topWolves')" name="topWolves">
+				<b>Wolves</b>
+				<p name="topWolvesTimer">2:30</p>
+			</a>
+			<!--Blue (5:00)-->
+			<a onclick="main('topBlue')" name="topBlue">
+				<b>Blue</b>
+				<p name="topBlueTimer">5:00</p>
+			</a>
+			<!--Gromp (2:30)-->
+			<a onclick="main('topGromp')" name="topGromp">
+				<b>Gromp</b>
+				<p name="topGrompTimer">2:30</p>
+			</a>
+		</div>
+
+		<!--Rift Scuttlers-->
+		<h1>Rift Scuttler</h1>
+		<div class="trackerContainer riftScuttler">
+			<a onclick="main('scuttler')" name="scuttler">
+				<b>Scuttler</b>
+				<p name="scuttlerTimer">2:30</p>
+			</a>
+		</div>
+
+		<!--Bot Side-->
+		<h1>Bot side camps</h1>
+		<div class="trackerContainer botSide">
+			<!--Gromp (2:30)-->
+			<a onclick="main('botGromp')" name="botGromp">
+				<b>Gromp</b>
+				<p name="botGrompTimer">2:30</p>
+			</a>
+			<!--Blue (5:00)-->
+			<a onclick="main('botBlue')" name="botBlue">
+				<b>Blue</b>
+				<p name="botBlueTimer">5:00</p>
+			</a>
+			<!--Wolves (2:30)-->
+			<a onclick="main('botWolves')" name="botWolves">
+				<b>Wolves</b>
+				<p name="botWolvesTimer">2:30</p>
+			</a>
+			<!--Raptors (2:30)-->
+			<a onclick="main('botRaptors')" name="botRaptors">
+				<b>Raptors</b>
+				<p name="botRaptorsTimer">2:30</p>
+			</a>
+			<!--Red (5:00)-->
+			<a onclick="main('botRed')" name="botRed">
+				<b>Red</b>
+				<p name="botRedTimer">5:00</p>
+			</a>
+			<!--Krugs (2:30)-->
+			<a onclick="main('botKrugs')" name="botKrugs">
+				<b>Krugs</b>
+				<p name="botKrugsTimer">2:30</p>
+			</a>
+		</div>
+
+
+		<style>
+			body {
+				font-family: sans-serif;
+			}
+			h1 {
+				margin: 25px;
+				text-align: center;
+			}
+			.trackerContainer {
+				width: 80vw;
+				max-width: 800px;
+				margin: 0 auto;
+				display: flex;
+				flex-direction: row;
+				flex-wrap: wrap;
+				justify-content: center;
+			}
+			.trackerContainer a b {
+				font-size: 1.5em;
+			}
+			.trackerContainer a {
+				flex: 1 1 auto;
+				max-width: 200px;
+				cursor: pointer;
+				background-color: #2196f3;
+				margin: 5px;
+				padding:5px;
+				border-radius: 10px;
+				text-align: center;
+				transition: 0.5s;
+				-webkit-transition: 0.5s;
+			}
+			.trackerContainer a:hover {
+				background-color: #1e88e5;
+				box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.18);
+				transition: 0.2s;
+				-webkit-transition: 0.2s;
+			}
+
+			/*Fancy Animations*/
+
+			.trackerContainer {
+				animation-name: slideIn;
+				animation-duration: 0.8s;
+				animation-fill-mode: forwards;
+				opacity: 0;
+			}
+
+			h1 {
+				animation-name: fadeIn;
+				animation-duration: 1s;
+				animation-fill-mode: forwards;
+				opacity: 0;
+				animation-delay: 1s;
+			}
+			
+			.topside{
+				animation-delay: 0s;
+			}
+			.riftScuttler {
+				animation-delay: 0.4s;
+			}
+			.botside {
+				animation-delay: 0.8s;
+			}
+
+			.active {
+				animation-name: activeAnimation;
+  				animation-iteration-count: infinite;
+				animation-duration: 1s
+			}
+
+			@keyframes activeAnimation {
+				0% {
+					box-shadow: 0 0 0 0px rgba(0, 0, 0, 0.2);
+				}
+				100% {
+					box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+				}
+			}
+
+			@keyframes slideIn {
+				0% {
+					margin-top: -10px;
+					opacity: 0;
+				}
+				100% {
+					margin-top: 0px;
+					opacity: 1;
+				}
+			}
+
+			@keyframes fadeIn {
+				0% { opacity: 0; }
+				100% { opacity: 1; }
+			}
+		</style>
+
+		<script>
+			const globalIntervals = {};
+			const camps = ["topKrugs", "topRed", "topRaptors", "topWolves", "topBlue", "topGromp", "scuttler", "botGromp", "botBlue", "botWolves", "botRaptors", "botRed", "botKrugs"];
+			
+			function main(camp) {
+				if (globalIntervals[camp]) clearInterval(globalIntervals[camp]);
+				const countdownTo = new Date().getTime() + (/(blue|red)/i.test(camp) ? 300000 : 150000);
+				//Modfied: add "active" class to toggled button
+				document.getElementsByName(camp)[0].classList.add("active")
+
+				globalIntervals[camp] = setInterval(function() {
+					const now = new Date().getTime();
+					const distance = countdownTo - now;
+					const minutes = Math.floor(distance / 60000);
+					const seconds = Math.floor((distance / 1000) - 60 * minutes);
+					const boxToChange = document.getElementsByName(camp)[0]
+					boxToChange.style.backgroundColor = "grey";
+					const timerToChange = document.getElementsByName(camp + "Timer")[0]
+					timerToChange.innerHTML = minutes + ":" + (seconds >= 10 ? seconds : `0${seconds}`);
+					if (minutes == 0 && seconds <= 30) {
+						boxToChange.style.backgroundColor = "#ffef38";
+						boxToChange.style.animationDuration = 1;
+					}
+					if (minutes == 0 && seconds <= 10) {
+						boxToChange.style.backgroundColor = "red";
+						boxToChange.style.animationDuration = .5;
+					}
+					if (minutes == 0 && seconds == 0 || distance < 0) {
+						boxToChange.style.backgroundColor = "green";
+						clearInterval(globalIntervals[camp]);
+						//Modified: remove "active" class from finished timer
+						document.getElementsByName(camp)[0].classList.remove("active");
+					}
+				}, 50)
+			}
+		</script>
+	</body>
+
+</html>
