@@ -1,0 +1,95 @@
+body {
+    font-family: sans-serif;
+}
+h1 {
+    margin: 25px;
+    text-align: center;
+}
+.trackerContainer {
+    width: 80vw;
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.trackerContainer a b {
+    font-size: 1.5em;
+}
+.trackerContainer a {
+    flex: 1 1 auto;
+    max-width: 200px;
+    cursor: pointer;
+    background-color: #2196f3;
+    margin: 5px;
+    padding:5px;
+    border-radius: 10px;
+    text-align: center;
+    transition: 0.5s;
+    -webkit-transition: 0.5s;
+}
+.trackerContainer a:hover {
+    background-color: #1e88e5;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.18);
+    transition: 0.2s;
+    -webkit-transition: 0.2s;
+}
+
+/*Fancy Animations*/
+
+.trackerContainer {
+    animation-name: slideIn;
+    animation-duration: 0.8s;
+    animation-fill-mode: forwards;
+    opacity: 0;
+}
+
+h1 {
+    animation-name: fadeIn;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    opacity: 0;
+    animation-delay: 1s;
+}
+
+.topside{
+    animation-delay: 0s;
+}
+.riftScuttler {
+    animation-delay: 0.4s;
+}
+.botside {
+    animation-delay: 0.8s;
+}
+
+.active {
+    animation-name: activeAnimation;
+    animation-iteration-count: infinite;
+    animation-duration: 1s
+}
+
+@keyframes activeAnimation {
+    0% {
+        box-shadow: 0 0 0 0px rgba(0, 0, 0, 0.2);
+    }
+    100% {
+        box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+    }
+}
+
+@keyframes slideIn {
+    0% {
+        margin-top: -10px;
+        opacity: 0;
+    }
+    100% {
+        margin-top: 0px;
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
