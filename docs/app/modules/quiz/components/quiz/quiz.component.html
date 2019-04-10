@@ -1,0 +1,68 @@
+<div class="container quiz-component">
+  <div *ngIf="!quizInProgress && !quizOver">
+    <h1>League of Cooldowns Quiz</h1>
+    <div><h3>Quiz Settings:</h3></div>
+    <div class="quiz-settings">
+      <span>Skill levels:</span> <br />
+
+      <label *ngFor="let level of levelsAvailable" class="quiz-option">
+        <input type="checkbox" [(ngModel)]="level.enabled">
+        <span>{{level.name}} </span>
+      </label> <br />
+
+      <span>Spells included:</span> <br />
+
+      <label *ngFor="let type of questionTypes" class="quiz-option">
+        <input type="checkbox" [(ngModel)]="type.enabled">
+        <span>{{type.name}} </span>
+      </label> <br />
+
+      <span>Number of Questions: </span>
+      <input class="questionNumInput" [(ngModel)]="numQuestions"/> <br /> <br />
+
+      <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#champZone" aria-expanded="false" aria-controls="champZone">
+          Enable/Disable Champions
+      </button><br />
+      <div class="collapse" id="champZone">
+        <div class="card card-body">
+          <button class="btn btn-secondary" (click)="enableAllChamps()">Enable All</button>
+          <button class="btn btn-secondary" (click)="disableAllChamps()">Disable All</button>
+          <div class="champList">
+            <label *ngFor="let champ of champsAvailable">
+              <input type="checkbox" [(ngModel)]="champ.enabled">
+              <span>{{champ.name}} </span>
+            </label>
+          </div>
+        </div>
+      </div>
+      <br />
+      <button class="btn btn-primary" (click)="defineQuestions()">Start Quiz</button>
+    </div>
+  </div>
+
+  <div *ngIf="quizInProgress"> 
+    <div>{{quizQuestions[currentQuestion].question}}</div> <br />
+    <div>
+      <img [src]="quizQuestions[currentQuestion].imageURL" title="{{quizQuestions[currentQuestion].skillDescription}}"/>
+    </div> <br />
+    <div *ngIf="!showCorrect">
+      <input [(ngModel)]="currentAnswer" type="number"/>
+      <button class="btn btn-primary" (click)="submitAnswer()">Submit</button>
+    </div>
+    <div *ngIf="showCorrect">
+      <span *ngIf="isClose">Close! The cooldown for this skill is {{quizQuestions[currentQuestion].answer}} seconds.</span>
+      <span *ngIf="!isClose">{{currentAnswer == quizQuestions[currentQuestion].answer ? "Correct!" : "Incorrect!"}} The cooldown for this skill is {{quizQuestions[currentQuestion].answer}} seconds.</span>
+      <button class="btn btn-primary" (click)="nextQuestion()">Next Question</button>
+    </div>
+  </div>
+
+  <div *ngIf="!quizInProgress && quizOver">
+    <span>Results:</span><br />
+    <span>You got {{numCorrect}} out of {{numQuestions}} questions correct</span>
+    <span *ngIf="numClose > 0">, but you were very close on {{numClose}} questions</span>
+    <span>!</span>
+    <br />
+    <br />
+    <button class="btn btn-primary" (click)="resetQuiz()">Retake?</button>
+  </div>
+</div>
